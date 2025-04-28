@@ -460,6 +460,7 @@
         
         // 提交訂單
         // 提交訂單
+        // 提交訂單
         function submitOrder() {
             const form = document.getElementById("orderForm");
             const name = document.getElementById("name").value;
@@ -497,79 +498,27 @@
             // Google Apps Script URL
             const scriptURL = 'https://script.google.com/macros/s/AKfycbz_zOflk0GFnaSbyIMhf78wDchNV660XO35AQXIKJuZT-jf2pW5R3BRMV4IZ3-FK1xm/exec';
             
-            // 創建一個隱藏的 iframe 用於提交
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            // 創建一個表單
-            const iframeForm = document.createElement('form');
-            iframeForm.method = 'POST';
-            iframeForm.action = scriptURL;
-            
-            // 添加數據
-            const dataInput = document.createElement('input');
-            dataInput.type = 'hidden';
-            dataInput.name = 'data';
-            dataInput.value = JSON.stringify(orderData);
-            iframeForm.appendChild(dataInput);
-            
-            // 將表單添加到 iframe 中
-            iframe.onload = function() {
-                try {
-                    // 獲取 iframe 內容
-                    const iframeContent = iframe.contentWindow.document.body.innerText;
-                    
-                    // 嘗試解析響應
-                    try {
-                        const response = JSON.parse(iframeContent);
-                        if (response.result === 'success') {
-                            showSubmitMessage(`訂單已成功提交！總金額：$${totalAmount}，感謝您的訂購！`);
-                            clearForm();
-                        } else {
-                            showSubmitMessage('提交失敗：' + (response.message || '未知錯誤'), false);
-                        }
-                    } catch (e) {
-                        // 如果無法解析 JSON，檢查文本內容
-                        if (iframeContent.includes('success')) {
-                            showSubmitMessage(`訂單已成功提交！總金額：$${totalAmount}，感謝您的訂購！`);
-                            clearForm();
-                        } else {
-                            showSubmitMessage('提交失敗：無法解析響應', false);
-                        }
-                    }
-                    
-                    // 移除 iframe
-                    setTimeout(function() {
-                        document.body.removeChild(iframe);
-                    }, 100);
-                    
-                } catch (error) {
-                    console.error('Error:', error);
-                    showSubmitMessage('提交失敗：' + error.message, false);
-                    
-                    // 移除 iframe
-                    setTimeout(function() {
-                        document.body.removeChild(iframe);
-                    }, 100);
+            // 使用 fetch API 代替 iframe
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    showSubmitMessage(`訂單已成功提交！總金額：$${totalAmount}，感謝您的訂購！`);
+                    clearForm();
+                } else {
+                    showSubmitMessage('提交失敗：' + (data.message || '未知錯誤'), false);
                 }
-            };
-            
-            // 處理錯誤情況
-            iframe.onerror = function() {
-                showSubmitMessage('提交失敗：網絡錯誤', false);
-                
-                // 移除 iframe
-                setTimeout(function() {
-                    document.body.removeChild(iframe);
-                }, 100);
-            };
-            
-            // 添加表單到 iframe
-            iframe.contentWindow.document.body.appendChild(iframeForm);
-            
-            // 提交表單
-            iframeForm.submit();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showSubmitMessage('提交失敗：' + error.message, false);
+            });
         }
     </script>
 </body>
