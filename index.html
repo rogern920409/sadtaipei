@@ -463,7 +463,7 @@
         // 提交訂單
         // 提交訂單
         function submitOrder() {
-            const form = document.getElementById("orderForm");
+            const orderForm = document.getElementById("orderForm");  // 改名為 orderForm
             const name = document.getElementById("name").value;
             const phone = document.getElementById("phone").value;
             const department = document.getElementById("department").value;
@@ -499,27 +499,24 @@
             // Google Apps Script URL
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwlCOTALZLOw8JMEp-BoVrOHIxBfHdXcV_CKOMYGCp9O82esRN022469h9oqZirb---/exec';
             
-            // 使用 fetch API 代替 iframe
-            fetch(scriptURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(orderData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === 'success') {
-                    showSubmitMessage(`訂單已成功提交！總金額：$${totalAmount}，感謝您的訂購！`);
-                    clearForm();
-                } else {
-                    showSubmitMessage('提交失敗：' + (data.message || '未知錯誤'), false);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showSubmitMessage('提交失敗：' + error.message, false);
-            });
+            // 表單提交模式 - 這裡不再使用 const form
+            const submitForm = document.createElement("form");  // 使用不同的變數名
+            submitForm.setAttribute("method", "post");
+            submitForm.setAttribute("action", scriptURL);
+            submitForm.setAttribute("target", "_blank");
+            
+            // 創建隱藏的輸入字段，包含 JSON 數據
+            const hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "data");
+            hiddenField.setAttribute("value", JSON.stringify(orderData));
+            
+            submitForm.appendChild(hiddenField);
+            document.body.appendChild(submitForm);
+            submitForm.submit();
+            document.body.removeChild(submitForm);
+            
+            showSubmitMessage("訂單已提交，請在彈出視窗確認結果！");
         }
     </script>
 </body>
