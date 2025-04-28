@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服裝訂購表單</title>
+    <title>衣服訂購表單</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1, h2 {
-            text-align: center;
-        }
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            color: #333;
         }
         .form-group {
             margin-bottom: 15px;
@@ -31,142 +33,186 @@
         input, select {
             width: 100%;
             padding: 8px;
-            box-sizing: border-box;
             border: 1px solid #ddd;
             border-radius: 4px;
-        }
-        .order-item {
-            background-color: #f9f9f9;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            position: relative;
-        }
-        .remove-btn {
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-            top: 10px;
+            box-sizing: border-box;
         }
         button {
-            padding: 10px 15px;
             background-color: #4CAF50;
             color: white;
+            padding: 10px 15px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-right: 10px;
+            font-size: 16px;
         }
         button:hover {
             background-color: #45a049;
         }
-        .total-price {
-            font-size: 18px;
-            font-weight: bold;
-            text-align: right;
-            margin-top: 20px;
-        }
-        .image-slider {
-            width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            margin-bottom: 20px;
-        }
-        .image-slider img {
-            width: 150px;
-            height: 150px;
-            margin-right: 10px;
-            object-fit: cover;
-            display: inline-block;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
+            margin: 20px 0;
         }
         th, td {
-            padding: 10px;
+            border: 1px solid #ddd;
+            padding: 8px;
             text-align: left;
         }
         th {
             background-color: #f2f2f2;
         }
+        .order-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .remove-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .remove-btn:hover {
+            background-color: #d32f2f;
+        }
+        .slider-container {
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            margin: 20px 0;
+        }
+        .slider-item {
+            display: inline-block;
+            margin-right: 20px;
+            vertical-align: top;
+        }
+        .slider-item img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+        .slider-caption {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .message {
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>服裝訂購表單</h1>
-        
-        <!-- 產品資訊表格 -->
-        <h2>衣服款式資訊</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>款式</th>
-                    <th>顏色</th>
-                    <th>尺寸</th>
-                    <th>價格</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>台ㄕ大</td>
-                    <td>黑, 白</td>
-                    <td>S, M, L, XL, 2XL</td>
-                    <td>$450</td>
-                </tr>
-                <tr>
-                    <td>台灣吃飯大學 舊款</td>
-                    <td>黑, 白, 灰</td>
-                    <td>S, M, L, XL, 2XL</td>
-                    <td>$590</td>
-                </tr>
-                <tr>
-                    <td>台灣吃飯大學 新款</td>
-                    <td>黑, 白, 灰</td>
-                    <td>S, M, L, XL, 2XL</td>
-                    <td>$590</td>
-                </tr>
-                <tr>
-                    <td>台灣吃飯大學帆布袋</td>
-                    <td>白</td>
-                    <td>統一尺寸</td>
-                    <td>$250</td>
-                </tr>
-                <tr>
-                    <td>勝利的精子</td>
-                    <td>白</td>
-                    <td>S, M, L, XL, 2XL</td>
-                    <td>$550</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- 圖片輪播 -->
-        <h2>款式展示</h2>
-        <div class="image-slider">
-            <!-- 這裡會放置產品圖片，目前使用預設圖片 -->
-            <img src="/api/placeholder/150/150" alt="台ㄕ大-黑色">
-            <img src="/api/placeholder/150/150" alt="台ㄕ大-白色">
-            <img src="/api/placeholder/150/150" alt="台灣吃飯大學舊款-黑色">
-            <img src="/api/placeholder/150/150" alt="台灣吃飯大學舊款-白色">
-            <img src="/api/placeholder/150/150" alt="台灣吃飯大學舊款-灰色">
-            <img src="/api/placeholder/150/150" alt="台灣吃飯大學新款-黑色">
-            <img src="/api/placeholder/150/150" alt="台灣吃飯大學新款-白色">
-            <img src="/api/placeholder/150/150" alt="台灣吃飯大學新款-灰色">
-            <img src="/api/placeholder/150/150" alt="台灣吃飯大學帆布袋-白色">
-            <img src="/api/placeholder/150/150" alt="勝利的精子-白色">
+    <div class="container">
+        <h1>傷心台北預購表單</h1>
+        <!-- 衣服款式資訊 -->
+        <h2>款式資訊</h2>
+        <div class="slider-container">
+            <div class="slider-item">
+                <img src="/台ㄕ大_黑.png" alt="台ㄕ大 - 黑色">
+                <div class="slider-caption">台ㄕ大 - 黑色</div>
+            </div>
+            <div class="slider-item">
+                <img src="/台ㄕ大_白.png" alt="台ㄕ大 - 白色">
+                <div class="slider-caption">台ㄕ大 - 白色</div>
+            </div>
+            <div class="slider-item">
+                <img src="/台灣吃飯大學_舊款_白.png" alt="台灣吃飯大學 舊款 - 黑色">
+                <div class="slider-caption">台灣吃飯大學 舊款 - 黑色</div>
+            </div>
+            <div class="slider-item">
+                <img src="/台灣吃飯大學_舊款_白.png" alt="台灣吃飯大學 舊款 - 白色">
+                <div class="slider-caption">台灣吃飯大學 舊款 - 白色</div>
+            </div>
+            <div class="slider-item">
+                <img src="/台灣吃飯大學_舊款_白.png" alt="台灣吃飯大學 舊款 - 灰色">
+                <div class="slider-caption">台灣吃飯大學 舊款 - 灰色</div>
+            </div>
+            <div class="slider-item">
+                <img src="/台灣吃飯大學_新款_黑.png" alt="台灣吃飯大學 新款 - 黑色">
+                <div class="slider-caption">台灣吃飯大學 新款 - 黑色</div>
+            </div>
+            <div class="slider-item">
+                <img src="/台灣吃飯大學_新款_白.png" alt="台灣吃飯大學 新款 - 白色">
+                <div class="slider-caption">台灣吃飯大學 新款 - 白色</div>
+            </div>
+            <div class="slider-item">
+                <img src="/台灣吃飯大學_新款_白.png" alt="台灣吃飯大學 新款 - 灰色">
+                <div class="slider-caption">台灣吃飯大學 新款 - 灰色</div>
+            </div>
+            <div class="slider-item">
+                <img src="/台灣吃飯大學帆布袋.png" alt="台灣吃飯大學帆布袋 - 白色">
+                <div class="slider-caption">台灣吃飯大學帆布袋 - 白色</div>
+            </div>
+            <div class="slider-item">
+                <img src="/勝利的精子.png" alt="勝利的精子 - 白色">
+                <div class="slider-caption">勝利的精子 - 白色</div>
+            </div>
         </div>
-
-        <!-- 個人資料表單 -->
+        
+        <table>
+            <tr>
+                <th>款式</th>
+                <th>顏色</th>
+                <th>尺寸</th>
+                <th>價格</th>
+            </tr>
+            <tr>
+                <td>台ㄕ大</td>
+                <td>黑, 白</td>
+                <td>S, M, L, XL, 2XL</td>
+                <td>$450</td>
+            </tr>
+            <tr>
+                <td>台灣吃飯大學 舊款</td>
+                <td>黑, 白, 灰</td>
+                <td>S, M, L, XL, 2XL</td>
+                <td>$590</td>
+            </tr>
+            <tr>
+                <td>台灣吃飯大學 新款</td>
+                <td>黑, 白, 灰</td>
+                <td>S, M, L, XL, 2XL</td>
+                <td>$590</td>
+            </tr>
+            <tr>
+                <td>台灣吃飯大學帆布袋</td>
+                <td>白</td>
+                <td>統一尺寸</td>
+                <td>$250</td>
+            </tr>
+            <tr>
+                <td>勝利的精子</td>
+                <td>白</td>
+                <td>S, M, L, XL, 2XL</td>
+                <td>$550</td>
+            </tr>
+        </table>
+        
+        <!-- 個人資料 -->
         <h2>個人資料</h2>
         <form id="orderForm">
             <div class="form-group">
@@ -189,17 +235,12 @@
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
-
-            <!-- 訂單項目 -->
-            <h2>訂購項目</h2>
-            <div id="orderItems">
-                <!-- 訂單項目會動態加入這裡 -->
-            </div>
-
-            <!-- 新增訂單項目表單 -->
+            
+            <!-- 添加訂單項目 -->
+            <h2>添加商品</h2>
             <div class="form-group">
                 <label for="style">款式</label>
-                <select id="style" name="style">
+                <select id="style" name="style" onchange="updateColorOptions()">
                     <option value="">請選擇款式</option>
                     <option value="台ㄕ大">台ㄕ大</option>
                     <option value="台灣吃飯大學 舊款">台灣吃飯大學 舊款</option>
@@ -210,32 +251,36 @@
             </div>
             <div class="form-group">
                 <label for="color">顏色</label>
-                <select id="color" name="color" disabled>
+                <select id="color" name="color">
                     <option value="">請先選擇款式</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="size">尺寸</label>
-                <select id="size" name="size" disabled>
+                <select id="size" name="size">
                     <option value="">請先選擇款式</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="quantity">數量</label>
-                <input type="number" id="quantity" name="quantity" min="1" value="1" disabled>
+                <input type="number" id="quantity" name="quantity" min="1" value="1">
             </div>
-
-            <button type="button" id="addItem">加入訂購項目</button>
-
-            <!-- 總金額 -->
-            <div class="total-price">總金額: $<span id="totalPrice">0</span></div>
-
-            <button type="button" id="submitOrder">提交訂單</button>
+            <div id="message" class="message"></div>
+            <button type="button" onclick="addItem()">添加商品</button>
+            
+            <!-- 訂單項目 -->
+            <h2>訂單項目</h2>
+            <div id="orderItems"></div>
+            
+            <div class="total">總金額: <span id="totalAmount">$0</span></div>
+            
+            <div id="submitMessage" class="message" style="margin-bottom: 10px;"></div>
+            <button type="button" onclick="submitOrder()">提交訂單</button>
         </form>
     </div>
 
     <script>
-        // 商品資料定義
+        // 定義商品資訊
         const products = {
             "台ㄕ大": {
                 colors: ["黑", "白"],
@@ -263,79 +308,85 @@
                 price: 550
             }
         };
-
-        // 訂單項目陣列
+        
         let orderItems = [];
-        let totalPrice = 0;
-
-        // DOM元素
-        const styleSelect = document.getElementById('style');
-        const colorSelect = document.getElementById('color');
-        const sizeSelect = document.getElementById('size');
-        const quantityInput = document.getElementById('quantity');
-        const addItemButton = document.getElementById('addItem');
-        const orderItemsContainer = document.getElementById('orderItems');
-        const totalPriceElement = document.getElementById('totalPrice');
-        const submitOrderButton = document.getElementById('submitOrder');
-
-        // 監聽款式選擇變更
-        styleSelect.addEventListener('change', function() {
-            const selectedStyle = this.value;
+        let totalAmount = 0;
+        
+        // 更新顏色選項
+        function updateColorOptions() {
+            const styleSelect = document.getElementById("style");
+            const colorSelect = document.getElementById("color");
+            const sizeSelect = document.getElementById("size");
             
-            // 重設顏色和尺寸選項
+            // 清空現有選項
             colorSelect.innerHTML = '<option value="">請選擇顏色</option>';
             sizeSelect.innerHTML = '<option value="">請選擇尺寸</option>';
             
-            if (selectedStyle) {
-                // 啟用顏色選擇
-                colorSelect.disabled = false;
-                
-                // 加入顏色選項
+            const selectedStyle = styleSelect.value;
+            
+            if (selectedStyle && products[selectedStyle]) {
+                // 添加對應的顏色選項
                 products[selectedStyle].colors.forEach(color => {
-                    const option = document.createElement('option');
+                    const option = document.createElement("option");
                     option.value = color;
                     option.textContent = color;
                     colorSelect.appendChild(option);
                 });
                 
-                // 加入尺寸選項
+                // 添加對應的尺寸選項
                 products[selectedStyle].sizes.forEach(size => {
-                    const option = document.createElement('option');
+                    const option = document.createElement("option");
                     option.value = size;
                     option.textContent = size;
                     sizeSelect.appendChild(option);
                 });
-                
-                // 啟用尺寸選擇和數量輸入
-                sizeSelect.disabled = false;
-                quantityInput.disabled = false;
-            } else {
-                // 如果沒有選擇款式，則停用其他選項
-                colorSelect.disabled = true;
-                sizeSelect.disabled = true;
-                quantityInput.disabled = true;
             }
-        });
-
-        // 加入訂購項目按鈕
-        addItemButton.addEventListener('click', function() {
-            const style = styleSelect.value;
-            const color = colorSelect.value;
-            const size = sizeSelect.value;
-            const quantity = parseInt(quantityInput.value);
+        }
+        
+        // 顯示訊息
+        function showMessage(text, isSuccess = true) {
+            const messageElement = document.getElementById("message");
+            messageElement.textContent = text;
+            messageElement.className = isSuccess ? "message success" : "message error";
+            messageElement.style.display = "block";
             
-            // 驗證表單
-            if (!style || !color || !size || !quantity || quantity < 1) {
-                alert('請完整填寫訂購項目資訊');
+            // 5秒後自動隱藏訊息
+            setTimeout(() => {
+                messageElement.style.display = "none";
+            }, 5000);
+        }
+        
+        // 顯示提交訊息
+        function showSubmitMessage(text, isSuccess = true) {
+            const messageElement = document.getElementById("submitMessage");
+            messageElement.textContent = text;
+            messageElement.className = isSuccess ? "message success" : "message error";
+            messageElement.style.display = "block";
+            
+            // 如果是成功訊息，5秒後自動隱藏
+            if (isSuccess) {
+                setTimeout(() => {
+                    messageElement.style.display = "none";
+                }, 5000);
+            }
+        }
+        
+        // 添加訂單項目
+        function addItem() {
+            const style = document.getElementById("style").value;
+            const color = document.getElementById("color").value;
+            const size = document.getElementById("size").value;
+            const quantity = parseInt(document.getElementById("quantity").value);
+            
+            if (!style || !color || !size || quantity < 1) {
+                showMessage("請選擇完整的商品信息並確保數量大於0", false);
                 return;
             }
             
-            // 計算項目價格
             const price = products[style].price;
             const itemTotal = price * quantity;
             
-            // 創建訂單項目對象
-            const orderItem = {
+            const item = {
                 style,
                 color,
                 size,
@@ -344,80 +395,92 @@
                 itemTotal
             };
             
-            // 將項目加入訂單
-            orderItems.push(orderItem);
-            
-            // 更新 UI
+            orderItems.push(item);
             renderOrderItems();
-            updateTotalPrice();
+            updateTotalAmount();
             
-            // 重設選項
-            styleSelect.selectedIndex = 0;
-            colorSelect.innerHTML = '<option value="">請先選擇款式</option>';
-            colorSelect.disabled = true;
-            sizeSelect.innerHTML = '<option value="">請先選擇款式</option>';
-            sizeSelect.disabled = true;
-            quantityInput.value = 1;
-            quantityInput.disabled = true;
-        });
-
+            // 顯示成功訊息
+            showMessage(`成功添加 ${quantity} 件 ${style} (${color}, ${size})`);
+            
+            // 清空表單以準備添加新商品
+            document.getElementById("style").selectedIndex = 0;
+            document.getElementById("color").innerHTML = '<option value="">請先選擇款式</option>';
+            document.getElementById("size").innerHTML = '<option value="">請先選擇款式</option>';
+            document.getElementById("quantity").value = 1;
+        }
+        
         // 渲染訂單項目
         function renderOrderItems() {
+            const orderItemsContainer = document.getElementById("orderItems");
             orderItemsContainer.innerHTML = '';
             
             orderItems.forEach((item, index) => {
-                const orderItemElement = document.createElement('div');
-                orderItemElement.className = 'order-item';
-                orderItemElement.innerHTML = `
-                    <p>款式: ${item.style}</p>
-                    <p>顏色: ${item.color}</p>
-                    <p>尺寸: ${item.size}</p>
-                    <p>數量: ${item.quantity}</p>
-                    <p>單價: $${item.price}</p>
-                    <p>小計: $${item.itemTotal}</p>
-                    <button type="button" class="remove-btn" data-index="${index}">移除</button>
+                const itemElement = document.createElement("div");
+                itemElement.className = "order-item";
+                itemElement.innerHTML = `
+                    <p><strong>款式:</strong> ${item.style}</p>
+                    <p><strong>顏色:</strong> ${item.color}</p>
+                    <p><strong>尺寸:</strong> ${item.size}</p>
+                    <p><strong>數量:</strong> ${item.quantity}</p>
+                    <p><strong>單價:</strong> $${item.price}</p>
+                    <p><strong>小計:</strong> $${item.itemTotal}</p>
+                    <button type="button" class="remove-btn" onclick="removeItem(${index})">刪除</button>
                 `;
-                orderItemsContainer.appendChild(orderItemElement);
+                orderItemsContainer.appendChild(itemElement);
             });
+        }
+        
+        // 移除訂單項目
+        function removeItem(index) {
+            const removedItem = orderItems[index];
+            orderItems.splice(index, 1);
+            renderOrderItems();
+            updateTotalAmount();
             
-            // 為移除按鈕添加事件監聽
-            document.querySelectorAll('.remove-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    orderItems.splice(index, 1);
-                    renderOrderItems();
-                    updateTotalPrice();
-                });
-            });
+            // 顯示刪除成功訊息
+            showMessage(`已刪除 ${removedItem.style} (${removedItem.color}, ${removedItem.size})`);
         }
-
-        // 更新總價
-        function updateTotalPrice() {
-            totalPrice = orderItems.reduce((sum, item) => sum + item.itemTotal, 0);
-            totalPriceElement.textContent = totalPrice;
+        
+        // 更新總金額
+        function updateTotalAmount() {
+            totalAmount = orderItems.reduce((sum, item) => sum + item.itemTotal, 0);
+            document.getElementById("totalAmount").textContent = `$${totalAmount}`;
         }
-
+        
+        // 清空表單函數
+        function clearForm() {
+            document.getElementById("name").value = '';
+            document.getElementById("phone").value = '';
+            document.getElementById("department").value = '';
+            document.getElementById("lineId").value = '';
+            document.getElementById("email").value = '';
+            orderItems = [];
+            renderOrderItems();
+            updateTotalAmount();
+        }
+        
         // 提交訂單
-        submitOrderButton.addEventListener('click', function() {
-            // 檢查是否有訂單項目
-            if (orderItems.length === 0) {
-                alert('請至少加入一個訂購項目');
-                return;
-            }
-            
-            // 檢查個人資料是否完整
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const department = document.getElementById('department').value;
-            const lineId = document.getElementById('lineId').value;
-            const email = document.getElementById('email').value;
+        // 提交訂單
+        // 提交訂單
+        function submitOrder() {
+            const form = document.getElementById("orderForm");
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const department = document.getElementById("department").value;
+            const lineId = document.getElementById("lineId").value;
+            const email = document.getElementById("email").value;
             
             if (!name || !phone || !department || !lineId || !email) {
-                alert('請完整填寫個人資料');
+                showSubmitMessage("請填寫完整的個人資料", false);
                 return;
             }
             
-            // 建立訂單資料物件
+            if (orderItems.length === 0) {
+                showSubmitMessage("請至少添加一個訂單項目", false);
+                return;
+            }
+            
+            // 準備訂單資料
             const orderData = {
                 personalInfo: {
                     name,
@@ -427,36 +490,37 @@
                     email
                 },
                 items: orderItems,
-                totalPrice
+                totalAmount
             };
             
-            // 將訂單資料轉為 JSON 字串
-            const orderDataJson = JSON.stringify(orderData, null, 2);
+            // 顯示提交中訊息
+            showSubmitMessage("正在提交訂單，請稍候...");
             
-            // 這裡可以將訂單資料傳送到伺服器
-            // 但由於題目要求儲存在檔案中，我們先用 console.log 來示範
-            console.log('訂單資料:', orderDataJson);
+            // Google Apps Script URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbz_zOflk0GFnaSbyIMhf78wDchNV660XO35AQXIKJuZT-jf2pW5R3BRMV4IZ3-FK1xm/exec';
             
-            // 將訂單資料存為檔案 (在實際環境中，這段會由後端處理)
-            // 由於瀏覽器安全限制，直接下載檔案
-            const blob = new Blob([orderDataJson], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `order_${Date.now()}.json`;
-            a.click();
-            
-            alert('訂單已提交成功！');
-            
-            // 重設表單
-            document.getElementById('orderForm').reset();
-            orderItems = [];
-            renderOrderItems();
-            updateTotalPrice();
-            colorSelect.disabled = true;
-            sizeSelect.disabled = true;
-            quantityInput.disabled = true;
-        });
+            // 使用 fetch API 代替 iframe
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    showSubmitMessage(`訂單已成功提交！總金額：$${totalAmount}，感謝您的訂購！`);
+                    clearForm();
+                } else {
+                    showSubmitMessage('提交失敗：' + (data.message || '未知錯誤'), false);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showSubmitMessage('提交失敗：' + error.message, false);
+            });
+        }
     </script>
 </body>
 </html>
